@@ -1,13 +1,14 @@
 package calculator_test
 
 import (
+	"log"
+	"os"
 	"testing"
 
 	"github.com/PacktPublishing/Test-Driven-Development-in-Go/chapter02/calculator"
 )
 
 func TestAdd(t *testing.T) {
-
 	e := calculator.Engine{}
 	x, y := 2.6, 3.4
 	want := 6.0
@@ -17,4 +18,26 @@ func TestAdd(t *testing.T) {
 	if got != 6.0 {
 		t.Errorf("Add (%.2f, %.2f) incorrect, got: %.2f, want: %.2f", x, y, got, want)
 	}
+}
+
+func TestMain(m *testing.M) {
+	setup()
+
+	e := m.Run()
+
+	teardown()
+
+	os.Exit(e)
+}
+
+func setup() {
+	log.Println("Setting up.")
+}
+
+func teardown() {
+	log.Println("Tearing down.")
+}
+
+func init() {
+	log.Println("Init setup.")
 }
